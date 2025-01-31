@@ -1,0 +1,22 @@
+*{
+    box-sizing: border-box;
+    margin:0;
+}
+#container{
+    margin:2% auto;
+    width:80vw;
+    height:90vh;
+    border-radius: 5%;
+    background-color: antiquewhite;
+}
+
+#formSignin{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+#formSignin >*{
+    margin:auto;
+    max-width: 90%;
+}
