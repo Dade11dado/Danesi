@@ -7,16 +7,38 @@
     width:80vw;
     height:90vh;
     border-radius: 5%;
-    background-color: antiquewhite;
+    background-color: #fafafa;
 }
 
 #formSignin{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    height: 70%;
 }
 
-#formSignin >*{
-    margin:auto;
+.formInput{
+    display: flex;
+    flex-direction: column;
     max-width: 90%;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.formInput input{
+    margin: .5rem;
+    height: 2rem;
+}
+
+.formInput label{
+    margin: .5rem;
+    height: 2rem;
+    text-align: center;
+}
+
+
+.formInput button{
+    height: 2rem;
 }
