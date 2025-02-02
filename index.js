@@ -4,6 +4,9 @@ const db = require("./data/database")
 const app = express()
 const bodyParser = require("body-parser")
 const authRoutes = require("./routes/authRoutes")
+const errorhandler = require("./middlewares/error-handler")
+const createSessionConfig = require("./config/session")
+const expressSession = require("express-session")
 
 
 //all use related to initialization
@@ -13,6 +16,8 @@ app.set("views", path.join(__dirname, "views"))
 //all use 
 app.use(express.static("public"))
 app.use(bodyParser.urlencoded({extended:true}))
+const sessionConfig = createSessionConfig()
+app.use(expressSession(sessionConfig))
 
 //routing
 app.use("/auth",authRoutes)
@@ -20,6 +25,8 @@ app.use("/auth",authRoutes)
 app.get("/",async (req,res)=>{
     res.render("singin.ejs")
 })
+
+app.use(errorhandler)
 
 
 db.connectToDatabase()
