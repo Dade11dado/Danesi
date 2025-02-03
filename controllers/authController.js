@@ -1,9 +1,26 @@
 const User = require("../models/userModel")
+const authUtil = require("../util/authentication")
 
-async function postSignin  (req,res,next){
-        const check = await User.signin(username=req.body.username,password=req.body.password)
-        console.log(req.body.password)
-        check?res.send("ok"):res.send("no")
+async function postSignin  (req,res){
+    const user = new User(req.body.username,req.body.password)
+    const existingUser = await user.getUserWithSameEmail()
+    if(!existingUser){
+        console.log("no user")
+        return 
+    }
+
+    const passwordIsCorrect = await user.hasMatchingPassword(existingUser.password)
+
+    if(!passwordIsCorrect){
+        console.log("no password")
+        return
+    }
+    authUtil.createUserSession(req,existingUser, function(){
+        res.redirect("/home")
+    })
+
+
+
 }
 
 async function postSignup(req,res,next){

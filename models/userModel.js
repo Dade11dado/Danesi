@@ -15,19 +15,15 @@ class User{
         })
     }
 
-    static async signin(username, password){
-        const result = await db.getDb().collection("users").findOne({
-            username
+     getUserWithSameEmail(){
+        return db.getDb().collection("users").findOne({
+            username:this.username
         })
-        bcrypt.compare(password,result.password,(err,res)=>{
-            if (err){
-                console.log(err)
-            }else{
-                return res
-            }
-        })
-        
-    }
+     }
+
+     hasMatchingPassword(hashedPassword){
+    return bcrypt.compare(this.password,hashedPassword)
+     }
 }
 
 module.exports = User

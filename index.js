@@ -5,6 +5,7 @@ const app = express()
 const bodyParser = require("body-parser")
 const authRoutes = require("./routes/authRoutes")
 const errorhandler = require("./middlewares/error-handler")
+const checkAuth = require("./middlewares/check-auth")
 const createSessionConfig = require("./config/session")
 const expressSession = require("express-session")
 
@@ -19,11 +20,17 @@ app.use(bodyParser.urlencoded({extended:true}))
 const sessionConfig = createSessionConfig()
 app.use(expressSession(sessionConfig))
 
+app.use(checkAuth)
 //routing
 app.use("/auth",authRoutes)
 
-app.get("/",async (req,res)=>{
+
+app.get("/",(req,res)=>{
     res.render("singin.ejs")
+})
+
+app.get("/home",(req,res)=>{
+    res.render("home.ejs")
 })
 
 app.use(errorhandler)
