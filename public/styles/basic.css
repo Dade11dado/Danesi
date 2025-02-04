@@ -11,6 +11,10 @@
     background-color: #fafafa;
 }
 
+#typeCard{
+    display:none
+}
+
 #formSignin{
     display: flex;
     flex-direction: column;

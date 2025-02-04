@@ -10,6 +10,22 @@
             <li>Storico</li>
         </ul>
       </div>
+      <div id="body">
+        <div>
+        <input type="text" id="inputNumber" name="cardId"/> 
+        <button id="searchCard" onclick="getCard()">Cerca</button>
+        </div>
+        <div id="infoCard">
+        <h1 id="cardNumber">Attesa carta</h1>
+        <h1 id="importo">0</h1>
+      </div>
+        <div>
+          <input type="text" value="plus" id="typeCard">
+          <input type="number" id="cifra">
+          <button id="cifraBtn" onclick="chargeCard()">Carica</button>
+        </div>
+      </div>
     </div>
     <p>Ciao  <%=locals.uid%></p>
+    <script src="/js/recharge.js"></script>
 <%- include("./includes/footer") %>

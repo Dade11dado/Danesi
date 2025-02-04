@@ -4,6 +4,7 @@ const authUtil = require("../util/authentication")
 async function postSignin  (req,res){
     const user = new User(req.body.username,req.body.password)
     const existingUser = await user.getUserWithSameEmail()
+    console.log(existingUser)
     if(!existingUser){
         console.log("no user")
         return 

@@ -4,6 +4,7 @@ const db = require("./data/database")
 const app = express()
 const bodyParser = require("body-parser")
 const authRoutes = require("./routes/authRoutes")
+const cardRoutes = require("./routes/cardRoutes")
 const errorhandler = require("./middlewares/error-handler")
 const checkAuth = require("./middlewares/check-auth")
 const createSessionConfig = require("./config/session")
@@ -23,6 +24,7 @@ app.use(expressSession(sessionConfig))
 app.use(checkAuth)
 //routing
 app.use("/auth",authRoutes)
+app.use("/card",cardRoutes)
 
 
 app.get("/",(req,res)=>{
