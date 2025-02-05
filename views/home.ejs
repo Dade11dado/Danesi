@@ -11,7 +11,9 @@
         </ul>
       </div>
       <div id="body">
-        <div>
+        <label for="cardId" id="labelRicarica">Inserisci numero carta</label>
+        <div id="findCardDiv">
+          
         <input type="text" id="inputNumber" name="cardId"/> 
         <button id="searchCard" onclick="getCard()">Cerca</button>
         </div>
@@ -19,7 +21,8 @@
         <h1 id="cardNumber">Attesa carta</h1>
         <h1 id="importo">0</h1>
       </div>
-        <div>
+      <label id="labelCifra" for="cifra">Inserisci importo di ricarica</label>
+        <div id="rechargeDiv">
           <input type="text" value="plus" id="typeCard">
           <input type="number" id="cifra">
           <button id="cifraBtn" onclick="chargeCard()">Carica</button>
@@ -27,5 +30,6 @@
       </div>
     </div>
     <p>Ciao  <%=locals.uid%></p>
+    <span class="loader" id="spinner"></span>
     <script src="/js/recharge.js"></script>
 <%- include("./includes/footer") %>

@@ -5,18 +5,19 @@ async function findCard(req,res){
     const newCard = new Card(cardNumber = req.body.cardId, totale = 0)
     const foundCard = await newCard.getCard()
     if(!foundCard){
-        return res.json({card:"card not found"})
+        postCard(req,res)
         
     }
     return res.json(foundCard)
 }
 
 async function postCard(req,res){
+    let total
+    !req.body.total?total=0:total=req.body.total
     const newCard = new Card(
         cardNumber=req.body.cardId,
-        total=req.body.total)
+        total=total)
     await newCard.insertCard()
-    res.send("ok")
 }
 
 async function modifyTotal(req,res){
