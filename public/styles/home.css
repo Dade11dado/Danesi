@@ -2,9 +2,11 @@
     border-top-right-radius: 5%;
     border-top-left-radius: 5%;
     background-color:rgb(188, 209, 241);
-    height:2rem
+    height:2rem;
+    padding:0
 }
 #navbar ul{
+    height: 100%;
    display: flex;
    flex-direction: row;
     text-decoration: none;
@@ -33,16 +35,12 @@ input{
     flex-direction: row;
      text-decoration: none;
      list-style-type: none;
+     padding: 0;
  }
- #navbar ul li:after{
-    content:""; 
-    background: white; 
-    position: absolute; 
-    bottom: 0; 
-    left: 0; 
-    height: 100%; 
-    width: 1.5px;
-
+ #navbar ul li{
+    border-radius: 3rem;
+    height:100%;
+    width:33%
  }
 
  #infoCard{

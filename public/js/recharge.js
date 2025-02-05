@@ -8,6 +8,32 @@ const typeCard = document.getElementById("typeCard")
 const spinner = document.getElementById("spinner")
 const labelCifra = document.getElementById("labelCifra")
 const labelRicarica = document.getElementById("labelRicarica")
+const btnNavCarica = document.getElementById("btnNavCarica")
+const btnNavScarica = document.getElementById("btnNavScrica")
+const btnNavStorico  =document.getElementById("btnNavStorico")
+
+let totalCard;
+
+btnNavCarica.addEventListener("click",()=>{
+    btnNavCarica.style.backgroundColor = "rgb(104, 158, 240)"
+    btnNavScarica.style.backgroundColor = "rgb(188, 209, 240)"
+    btnNavStorico.style.backgroundColor = "rgb(188, 209, 240)"
+    typeCard.value = "plus"
+})
+
+btnNavScarica.addEventListener("click",()=>{
+    btnNavCarica.style.backgroundColor = "rgb(188, 209, 240)"
+    btnNavScarica.style.backgroundColor = "rgb(104, 158, 240)"
+    btnNavStorico.style.backgroundColor = "rgb(188, 209, 240)"
+    typeCard.value = "minus"
+})
+
+btnNavStorico.addEventListener("click",()=>{
+    btnNavCarica.style.backgroundColor = "rgb(188, 209, 240)"
+    btnNavScarica.style.backgroundColor = "rgb(188, 209, 240)"
+    btnNavStorico.style.backgroundColor = "rgb(104, 158, 240)"
+})
+
 async function getCard(){
     spinner.style.display = "block"
     let response
@@ -18,6 +44,7 @@ async function getCard(){
     })
    
     const obj = await response.json()
+    totalCard = obj.total
     spinner.style.display = "none"
     cardNUmber.style.display = "block"
     importo.style.display = "block"
@@ -29,11 +56,16 @@ async function getCard(){
     findBtn.style.display ="none"
     cardNUmber.innerHTML = obj.cardNumber
     importo.innerHTML = obj.total
+    console.log("total card: "+ totalCard)
+    if(typeCard.value != "plus"){
+        cifra.setAttribute("max",totalCard)
+    }
 }
 
 async function chargeCard(){
     let total = cifra.value
     let type = typeCard.value
+    
     let cardId = inputNumber.value
     console.log(total,typeCard,cardId)
     let response

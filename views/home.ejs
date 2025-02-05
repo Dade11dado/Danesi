@@ -5,9 +5,9 @@
     <div id="container">
       <div id="navbar">
         <ul>
-            <li>Carica</li>
-            <li>Utilizza</li>
-            <li>Storico</li>
+            <li id="btnNavCarica">Carica</li>
+            <li id="btnNavScrica">Utilizza</li>
+            <li id="btnNavStorico">Storico</li>
         </ul>
       </div>
       <div id="body">
@@ -21,10 +21,10 @@
         <h1 id="cardNumber">Attesa carta</h1>
         <h1 id="importo">0</h1>
       </div>
-      <label id="labelCifra" for="cifra">Inserisci importo di ricarica</label>
+      <label id="labelCifra" for="cifra">Inserisci importo</label>
         <div id="rechargeDiv">
           <input type="text" value="plus" id="typeCard">
-          <input type="number" id="cifra">
+          <input type="number" id="cifra" max="" min="1">
           <button id="cifraBtn" onclick="chargeCard()">Carica</button>
         </div>
       </div>

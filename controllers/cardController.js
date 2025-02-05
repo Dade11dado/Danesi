@@ -4,9 +4,9 @@ async function findCard(req,res){
     console.log(req.body.cardId)
     const newCard = new Card(cardNumber = req.body.cardId, totale = 0)
     const foundCard = await newCard.getCard()
+    console.log("card:" + foundCard)
     if(!foundCard){
         postCard(req,res)
-        
     }
     return res.json(foundCard)
 }
