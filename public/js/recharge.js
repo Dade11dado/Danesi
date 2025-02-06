@@ -11,6 +11,8 @@ const labelRicarica = document.getElementById("labelRicarica")
 const btnNavCarica = document.getElementById("btnNavCarica")
 const btnNavScarica = document.getElementById("btnNavScrica")
 const btnNavStorico  =document.getElementById("btnNavStorico")
+const body  = document.getElementById("body")
+const history  = document.getElementById("history")
 
 let totalCard;
 
@@ -26,12 +28,16 @@ btnNavScarica.addEventListener("click",()=>{
     btnNavScarica.style.backgroundColor = "rgb(104, 158, 240)"
     btnNavStorico.style.backgroundColor = "rgb(188, 209, 240)"
     typeCard.value = "minus"
+   
 })
 
 btnNavStorico.addEventListener("click",()=>{
     btnNavCarica.style.backgroundColor = "rgb(188, 209, 240)"
     btnNavScarica.style.backgroundColor = "rgb(188, 209, 240)"
     btnNavStorico.style.backgroundColor = "rgb(104, 158, 240)"
+    body.style.display = "none"
+    history.style.display = "block"
+
 })
 
 async function getCard(){

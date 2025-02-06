@@ -1,5 +1,6 @@
 <%- include("./includes/head") %>
 <link rel="stylesheet" href="/styles/home.css">
+<link rel="stylesheet" href="./styles/history.css">
 </head>
 <body>
     <div id="container">
@@ -27,6 +28,9 @@
           <input type="number" id="cifra" max="" min="1">
           <button id="cifraBtn" onclick="chargeCard()">Carica</button>
         </div>
+      </div>
+      <div id="history">
+        <%-include("./includes/history")%>
       </div>
     </div>
     <p>Ciao  <%=locals.uid%></p>
