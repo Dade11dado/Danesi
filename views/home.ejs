@@ -14,7 +14,6 @@
       <div id="body">
         <label for="cardId" id="labelRicarica">Inserisci numero carta</label>
         <div id="findCardDiv">
-          
         <input type="text" id="inputNumber" name="cardId"/> 
         <button id="searchCard" onclick="getCard()">Cerca</button>
         </div>
@@ -33,7 +32,9 @@
         <%-include("./includes/history")%>
       </div>
     </div>
-    <p>Ciao  <%=locals.uid%></p>
+    <p>Ciao  <%=locals.username%></p>
     <span class="loader" id="spinner"></span>
     <script src="/js/recharge.js"></script>
+    <script src="/js/getTransaction.js"></script>
+    <script src="/js/findByParams.js"></script>
 <%- include("./includes/footer") %>

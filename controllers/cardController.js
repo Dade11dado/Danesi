@@ -1,12 +1,10 @@
 const Card = require("../models/cardModel")
 
 async function findCard(req,res){
-    console.log(req.body.cardId)
     const newCard = new Card(cardNumber = req.body.cardId, totale = 0)
     const foundCard = await newCard.getCard()
-    console.log("card:" + foundCard)
     if(!foundCard){
-        postCard(req,res)
+       return res.json({card:"Card not found"}) 
     }
     return res.json(foundCard)
 }
@@ -36,11 +34,29 @@ async function modifyTotal(req,res){
         }else{
             total-=newTotal
             const resolution = await newCard.rechargeCard(total)
+            await fetch("http://localhost:3000/transaction/insertOne",{
+                method:"POST",
+                body: new URLSearchParams({
+                cardId:req.body.cardId,
+                typeCard:req.body.typeCard,
+                cifra:req.body.total,
+                farmacy:req.session.username
+                })
+            })
             return res.json(resolution)
         }
     }else{
         total+=newTotal
         const resolution = await newCard.rechargeCard(total)
+        await fetch("http://localhost:3000/transaction/insertOne",{
+            method:"POST",
+            body: new URLSearchParams({
+            cardId:req.body.cardId,
+            typeCard:req.body.typeCard,
+            cifra:req.body.total,
+            farmacy:req.session.username
+            })
+        })
         return res.json(resolution)
     }
    

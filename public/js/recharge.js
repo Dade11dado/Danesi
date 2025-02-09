@@ -21,6 +21,10 @@ btnNavCarica.addEventListener("click",()=>{
     btnNavScarica.style.backgroundColor = "rgb(188, 209, 240)"
     btnNavStorico.style.backgroundColor = "rgb(188, 209, 240)"
     typeCard.value = "plus"
+    body.style.display = "flex"
+    history.style.display = "none"
+    clearTable()
+    resetInput()
 })
 
 btnNavScarica.addEventListener("click",()=>{
@@ -28,6 +32,10 @@ btnNavScarica.addEventListener("click",()=>{
     btnNavScarica.style.backgroundColor = "rgb(104, 158, 240)"
     btnNavStorico.style.backgroundColor = "rgb(188, 209, 240)"
     typeCard.value = "minus"
+    body.style.display = "flex"
+    history.style.display = "none"
+    clearTable()
+    resetInput()
    
 })
 
@@ -37,19 +45,34 @@ btnNavStorico.addEventListener("click",()=>{
     btnNavStorico.style.backgroundColor = "rgb(104, 158, 240)"
     body.style.display = "none"
     history.style.display = "block"
+    fullTable()
+    resetInput()
 
 })
 
 async function getCard(){
     spinner.style.display = "block"
-    let response
-    response = await fetch("http://localhost:3000/card/find",{
-        method:"POST",
-        body:new URLSearchParams({cardId:inputNumber.value})
-       
-    })
+    let obj =  await getInfo()
+    if(obj.card == "Card not found"){
+        const answerToConfrim = window.confirm("Carta non presente, vuoi aggiungerla al database?")
+       if(answerToConfrim){
+        postCard()
+        obj = await getInfo()
+        feedDiv(obj)
+       }else{
+        resetInput()
+       }
+    }else{
+        obj = await getInfo()
+        feedDiv(obj)
+    }
    
-    const obj = await response.json()
+
+
+   
+}
+
+function feedDiv(obj){
     totalCard = obj.total
     spinner.style.display = "none"
     cardNUmber.style.display = "block"
@@ -62,18 +85,54 @@ async function getCard(){
     findBtn.style.display ="none"
     cardNUmber.innerHTML = obj.cardNumber
     importo.innerHTML = obj.total
-    console.log("total card: "+ totalCard)
     if(typeCard.value != "plus"){
         cifra.setAttribute("max",totalCard)
     }
 }
 
+function resetInput(){
+    findBtn.style.display = "block"
+    inputNumber.style.display = "block"
+labelRicarica.style.display = "flex"
+cardNUmber.style.display="none"
+importo.style.display="none"
+ cifra.style.display="none"
+ typeCard.style.display="none"
+ spinner.style.display="none"
+ labelCifra.style.display="none"
+ cifraBtn.style.display = "none"
+ cifra.value = ""
+
+}
+
+async function postCard(){
+    await fetch("http://localhost:3000/card/insert",{
+        method:"POST",
+        body: new URLSearchParams({cardId:inputNumber.value})
+    })
+    return
+}
+
+async function getInfo(){
+    let response
+    response = await fetch("http://localhost:3000/card/find",{
+        method:"POST",
+        body:new URLSearchParams({cardId:inputNumber.value})
+    })
+    const obj = await response.json()
+    return obj
+}
+
 async function chargeCard(){
     let total = cifra.value
     let type = typeCard.value
-    
     let cardId = inputNumber.value
-    console.log(total,typeCard,cardId)
+    const totalCard = +importo.innerHTML
+    if(type === "minus" && total>totalCard){
+        alert("Non puoi sottrarre una cifra maggiore della disponibilità")
+        resetInput()
+        return
+    }
     let response
     response = await fetch("http://localhost:3000/card/recharge",
         {method:"POST",
@@ -81,5 +140,8 @@ async function chargeCard(){
         }
     )
     cifra.value = 0
+    let condition = type=="plus"?"caricata di":"utilizzata per"
+    alert(`Carta ${inputNumber.value} ${condition} ${total} euro` )
     getCard()
+    resetInput()
 }

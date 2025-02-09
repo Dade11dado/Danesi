@@ -85,3 +85,7 @@ button{
      #cardNumber, #importo, #cifra, #cifraBtn, #spinner, #labelCifra{
         display: none;
     }
+
+    #btnNavCarica{
+        background-color: rgb(104, 158, 240);
+    }
