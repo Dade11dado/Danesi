@@ -9,7 +9,7 @@ var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
 buttonS.addEventListener("click", async ()=>{
     console.log(process.env.FETCH_URL)
     spinner.style.display = "block"
-    const response = await fetch(` https://mighty-oasis-93934-d4a0b00bbc93.herokuapp.com/transaction/findBy/?cardNumber=${number.value.trim()}&dateTo=${dateTo.value}&dateFrom=${dateFrom.value}`)
+    const response = await fetch(` https://danesi.onrender.com/transaction/findBy/?cardNumber=${number.value.trim()}&dateTo=${dateTo.value}&dateFrom=${dateFrom.value}`)
     const obj = await response.json()
     clearTable()
     if(obj.length == 0){

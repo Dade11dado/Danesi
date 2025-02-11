@@ -106,7 +106,7 @@ importo.style.display="none"
 }
 
 async function postCard(){
-    await fetch(`$ https://mighty-oasis-93934-d4a0b00bbc93.herokuapp.com/card/insert`,{
+    await fetch(`https://danesi.onrender.com/card/insert`,{
         method:"POST",
         body: new URLSearchParams({cardId:inputNumber.value})
     })
@@ -115,7 +115,7 @@ async function postCard(){
 
 async function getInfo(){
     let response
-    response = await fetch(` https://mighty-oasis-93934-d4a0b00bbc93.herokuapp.com/card/find`,{
+    response = await fetch(`https://danesi.onrender.com/card/find`,{
         method:"POST",
         body:new URLSearchParams({cardId:inputNumber.value})
     })
@@ -134,7 +134,7 @@ async function chargeCard(){
         return
     }
     let response
-    response = await fetch(` https://mighty-oasis-93934-d4a0b00bbc93.herokuapp.com/card/recharge`,
+    response = await fetch(`https://danesi.onrender.com/card/recharge`,
         {method:"POST",
             body:new URLSearchParams({typeCard:type,cardId:cardId,total:total})
         }

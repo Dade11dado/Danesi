@@ -14,7 +14,7 @@ async function fullTable(){
         `
         table.appendChild(headerRow)
 
-    const response = await fetch(` https://mighty-oasis-93934-d4a0b00bbc93.herokuapp.com/transaction/all`)
+    const response = await fetch(`https://danesi.onrender.com/transaction/all`)
     const obj = await response.json()
     for(const ele of obj){
         let typeCon = ele.type == "minus" ? "Utilizzo" : "Ricarica"
