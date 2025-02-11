@@ -7,6 +7,7 @@ const fields = document.getElementById("divTable")
 var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour:"2-digit", minute:"2-digit" };
 
 buttonS.addEventListener("click", async ()=>{
+    console.log(process.env.FETCH_URL)
     spinner.style.display = "block"
     const response = await fetch(`${process.env.FETCH_URL}/transaction/findBy/?cardNumber=${number.value.trim()}&dateTo=${dateTo.value}&dateFrom=${dateFrom.value}`)
     const obj = await response.json()
