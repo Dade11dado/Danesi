@@ -1,0 +1,27 @@
+{
+  "name": "danesi",
+  "version": "1.0.0",
+  "description": "Site to generate ticket",
+  "main": "index.js",
+  "engines": {
+    "node":"23.x"
+  },
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "author": "Davide",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.3",
+    "connect-mongodb-session": "^5.0.0",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-session": "^1.18.1",
+    "mongodb": "^6.13.0",
+    "mongoose": "^8.9.6"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
