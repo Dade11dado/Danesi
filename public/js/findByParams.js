@@ -8,7 +8,7 @@ var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
 
 buttonS.addEventListener("click", async ()=>{
     spinner.style.display = "block"
-    const response = await fetch(`http://localhost:3000/transaction/findBy/?cardNumber=${number.value.trim()}&dateTo=${dateTo.value}&dateFrom=${dateFrom.value}`)
+    const response = await fetch(`${process.env.FETCH_URL}/transaction/findBy/?cardNumber=${number.value.trim()}&dateTo=${dateTo.value}&dateFrom=${dateFrom.value}`)
     const obj = await response.json()
     clearTable()
     if(obj.length == 0){

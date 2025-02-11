@@ -106,7 +106,7 @@ importo.style.display="none"
 }
 
 async function postCard(){
-    await fetch("http://localhost:3000/card/insert",{
+    await fetch(`${process.env.FETCH_URL}/card/insert`,{
         method:"POST",
         body: new URLSearchParams({cardId:inputNumber.value})
     })
@@ -115,7 +115,7 @@ async function postCard(){
 
 async function getInfo(){
     let response
-    response = await fetch("http://localhost:3000/card/find",{
+    response = await fetch(`${process.env.FETCH_URL}/card/find`,{
         method:"POST",
         body:new URLSearchParams({cardId:inputNumber.value})
     })
@@ -134,7 +134,7 @@ async function chargeCard(){
         return
     }
     let response
-    response = await fetch("http://localhost:3000/card/recharge",
+    response = await fetch(`${process.env.FETCH_URL}/card/recharge`,
         {method:"POST",
             body:new URLSearchParams({typeCard:type,cardId:cardId,total:total})
         }

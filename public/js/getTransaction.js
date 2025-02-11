@@ -14,7 +14,7 @@ async function fullTable(){
         `
         table.appendChild(headerRow)
 
-    const response = await fetch("http://localhost:3000/transaction/all")
+    const response = await fetch(`${process.env.FETCH_URL}/transaction/all`)
     const obj = await response.json()
     for(const ele of obj){
         let typeCon = ele.type == "minus" ? "Utilizzo" : "Ricarica"

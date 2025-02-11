@@ -5,7 +5,7 @@ function createSessionStore(){
     const MongoDBStore = mongoDbStore(expressSession)
 
     const store = new MongoDBStore({
-        uri:"mongodb://localhost:27017",
+        uri:process.env.MONGO_BD_URL,
         databaseName:"Danesi",
         collection:"sessions"
     })
@@ -15,7 +15,7 @@ function createSessionStore(){
 
 function createSessionConfig(){
     return {
-        secret:"superTrouper",
+        secret:process.env.SECRET,
         resave: false,
         saveUninitialized:false,
         store:createSessionStore(),

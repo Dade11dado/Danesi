@@ -34,7 +34,7 @@ async function modifyTotal(req,res){
         }else{
             total-=newTotal
             const resolution = await newCard.rechargeCard(total)
-            await fetch("http://localhost:3000/transaction/insertOne",{
+            await fetch(`${process.env.FETCH_URL}/transaction/insertOne`,{
                 method:"POST",
                 body: new URLSearchParams({
                 cardId:req.body.cardId,
@@ -48,7 +48,7 @@ async function modifyTotal(req,res){
     }else{
         total+=newTotal
         const resolution = await newCard.rechargeCard(total)
-        await fetch("http://localhost:3000/transaction/insertOne",{
+        await fetch(`${process.env.FETCH_URL}/transaction/insertOne`,{
             method:"POST",
             body: new URLSearchParams({
             cardId:req.body.cardId,
