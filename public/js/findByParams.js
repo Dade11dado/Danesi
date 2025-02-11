@@ -7,13 +7,15 @@ const fields = document.getElementById("divTable")
 var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour:"2-digit", minute:"2-digit" };
 
 buttonS.addEventListener("click", async ()=>{
-    const response = await fetch(`http://localhost:3000/transaction/findBy/?cardNumber=${number.value}&dateTo=${dateTo.value}&dateFrom=${dateFrom.value}`)
+    spinner.style.display = "block"
+    const response = await fetch(`http://localhost:3000/transaction/findBy/?cardNumber=${number.value.trim()}&dateTo=${dateTo.value}&dateFrom=${dateFrom.value}`)
     const obj = await response.json()
     clearTable()
     if(obj.length == 0){
-        alert("non sono state trovate transazioni, prova a modificare i flìiltri di ricerca")
+        alert("<h1>non sono state trovate transazioni, prova a modificare i flìiltri di ricerca</h1>")
         return
     }
+       spinner.style.display = "none"
         let headerRow = document.createElement("tr")
         headerRow.innerHTML = `
         <tr>

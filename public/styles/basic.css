@@ -63,6 +63,10 @@ button{
     text-align: center;
 }
 
+input{
+    padding-left:1rem
+}
+
 
 .formInput button{
     width:20%;
@@ -89,3 +93,13 @@ button{
     #btnNavCarica{
         background-color: rgb(104, 158, 240);
     }
+
+    #errorBox{
+        margin:auto;
+        background-color: #ff474caf;
+        height:150px;
+        width:400px;
+text-align: center;
+font-size:.5rem;
+align-items: center;
+     }

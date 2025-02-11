@@ -4,8 +4,14 @@ const MongoClient = mongodb.MongoClient
 
 let database
 
+let mongodburl = "mongodb://localhost:27017"
+
+if(process.env.MONGO_BD_URL){
+    mongodburl = process.env.MONGO_BD_URL
+}
+
 async function connectToDatabase(){
-     const client = await MongoClient.connect("mongodb://localhost:27017")
+     const client = await MongoClient.connect(mongodburl)
      database = client.db("Danesi")
 }
 

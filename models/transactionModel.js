@@ -25,12 +25,28 @@ class Transaction{
     }
 
     static async getQueryTransaction(number,dateTo,dateFrom){
-        if (number && dateTo && dateFrom){
+        if (!dateTo){
+            dateTo = new Date()
+        }
+
+        if(!dateFrom){
+            dateFrom = new Date("2025-01-01")
+        }
+
+        if(number){
             return db.getDb().collection("transaction").find({
-                cardNumber: number,
-                date:{$gte: new Date(`${dateFrom}`)}
+                $and:[{date: {$gte: new Date(`${dateFrom != null ? dateFrom : ""}`)}},
+                    {date: {$lte: new Date(`${dateTo != null ? dateTo : ""}`)}},
+                    {cardNumber: number != null ? number : ""}]
+            }).toArray()
+        }else{
+            return db.getDb().collection("transaction").find({
+                $and:[{date: {$gte: new Date(`${dateFrom != null ? dateFrom : ""}`)}},
+                    {date: {$lte: new Date(`${dateTo != null ? dateTo : ""}`)}}]
             }).toArray()
         }
+            
+           
     }
 }
 

@@ -2,10 +2,16 @@
 </head>
 <body>
     <div id="container">
+        <%if(inputData.errorMessage){%>
+            <div id="errorBox">
+                <h1>Attenzione</h1>
+                <h1><%=inputData.errorMessage%></h1>
+            </div>
+            <%}%>
         <form action="/auth/signin" method="POST" id="formSignin">
             <div class="formInput">
                 <label for="username">Nome utente:</label>
-                <input type="text" required id="username" name="username">
+                <input type="text" required id="username" name="username" value="<%=inputData.username%>">
             </div>
             <div class="formInput">
                 <label for="password">Password:</label>

@@ -10,7 +10,14 @@ const errorhandler = require("./middlewares/error-handler")
 const checkAuth = require("./middlewares/check-auth")
 const createSessionConfig = require("./config/session")
 const expressSession = require("express-session")
+const flash = require("./util/session-flash")
+const secureRoutes = require("./middlewares/secureRoutes")
 
+let PORT = 3000
+
+if (process.env.PORT){
+    PORT = process.env.PORT
+}
 
 //all use related to initialization
 app.set("view engine", "ejs")
@@ -25,15 +32,26 @@ app.use(expressSession(sessionConfig))
 app.use(checkAuth)
 //routing
 app.use("/auth",authRoutes)
-app.use("/card",cardRoutes)
+app.use("/card",secureRoutes,cardRoutes)
 app.use("/transaction",transRoute)
 
 
 app.get("/",(req,res)=>{
-    res.render("singin.ejs")
+    let sessionData = flash.getSessionData(req)
+    if (!sessionData){
+        sessionData = {
+            username:""
+        }
+    }
+    if(res.locals.isAuth){
+res.redirect("/home")
+    }else{
+        res.render("singin.ejs",{inputData: sessionData})
+    }
+    
 })
 
-app.get("/home",(req,res)=>{
+app.get("/home",secureRoutes,(req,res)=>{
     res.render("home.ejs")
 })
 
@@ -44,7 +62,7 @@ db.connectToDatabase()
 .then(()=>{console.log("Connected to db")})
 .catch((e)=>{console.log("failed: "+ e)})
 
-app.listen(3000, ()=>{
+app.listen(PORT, ()=>{
     console.log("Connected to server")
 })
 
