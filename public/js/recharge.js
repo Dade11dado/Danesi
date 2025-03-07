@@ -15,6 +15,7 @@ const body  = document.getElementById("body")
 const history  = document.getElementById("history")
 
 let totalCard;
+var cardId;
 
 btnNavCarica.addEventListener("click",()=>{
     btnNavCarica.style.backgroundColor = "rgb(104, 158, 240)"
@@ -51,12 +52,13 @@ btnNavStorico.addEventListener("click",()=>{
 })
 
 async function getCard(){
+    cardId=inputNumber.value
     spinner.style.display = "block"
     let obj =  await getInfo()
     if(obj.card == "Card not found"){
         const answerToConfrim = window.confirm("Carta non presente, vuoi aggiungerla al database?")
        if(answerToConfrim){
-        let a1 = await postCard()
+        postCard()
         let obj1 = await getInfo()
         feedDiv(obj1)
        }else{
@@ -116,7 +118,7 @@ async function getInfo(){
     let response
     response = await fetch(`https://danesi.onrender.com/card/find`,{
         method:"POST",
-        body:new URLSearchParams({cardId:inputNumber.value})
+        body:new URLSearchParams({cardId:cardId})
     })
     const obj = await response.json()
     return obj
