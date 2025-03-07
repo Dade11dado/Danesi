@@ -56,7 +56,7 @@ async function getCard(){
     if(obj.card == "Card not found"){
         const answerToConfrim = window.confirm("Carta non presente, vuoi aggiungerla al database?")
        if(answerToConfrim){
-        postCard()
+        let a1 = await postCard()
         let obj1 = await getInfo()
         feedDiv(obj1)
        }else{
