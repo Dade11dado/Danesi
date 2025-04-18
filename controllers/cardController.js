@@ -11,10 +11,11 @@ async function findCard(req,res){
 
 async function postCard(req,res){
     let total
+    console.log(req.body.total)
     !req.body.total?total=0:total=req.body.total
     const newCard = new Card(
         cardNumber=req.body.cardId,
-        total=+total)
+        total=total)
     await newCard.insertCard()
 }
 
