@@ -27,7 +27,7 @@ async function modifyTotal(req,res){
         return res.send("no card found")
     }
     let total = +card.total
-    let newTotal = +req.body
+    let newTotal = +req.body.total
 
     if(typeCard != "plus"){
         if(newTotal > total){
