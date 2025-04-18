@@ -81,7 +81,7 @@ function feedDiv(obj){
     inputNumber.style.display ="none"
     findBtn.style.display ="none"
     cardNUmber.innerHTML = obj.cardNumber
-    importo.innerHTML = obj.total
+    importo.innerHTML = obj.total.toFixed(2)
     if(typeCard.value != "plus"){
         cifra.setAttribute("max",totalCard)
     }
